@@ -1,16 +1,24 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from "react";
+import ReactDOM from 'react-dom';
+import { connect } from "react-redux";
 // import { addTodo } from '../actions'
+import { ModalComponents } from '../actions/index';
 
-const ModalRoot = ({ children, onClose, open }) => 
+const ModalRoot = ({ isOpen, component, onCloseCb }) => {
+  debugger
+  const NestedComponent = ModalComponents[component];
+  return isOpen
+    ? ReactDOM.createPortal(
+        <div className="modal">
+          <button onClick={onCloseCb} className="modal__close">
+            &times;
+          </button>
+          <NestedComponent/>
+        </div>,
+        document.body
+      )
+    : null;
+};
 // export const Modal = ({ children, onClose, open }) =>
-  open ?
-    createPortal(
-      <div className='modal'>
-        <button onClick={onClose} className='modal__close'>&times;</button>
-        {children}
-      </div>,
-    document.body)
-    : null
 
 export default connect()(ModalRoot);

@@ -1,3 +1,5 @@
+import * as App from '../components/App';
+
 let nextTodoId = 0
 export const addTodo = text => ({
   type: 'ADD_TODO',
@@ -21,11 +23,16 @@ export const VisibilityFilters = {
   SHOW_ACTIVE: 'SHOW_ACTIVE'
 }
 
-export const OpenRootModal = component => ({
+export const ModalComponents = {
+  App,
+};
+
+export const openRootModal = (component, onCloseCb) => dispatch => dispatch({
   type: 'OPEN_ROOT_MODAL',
   component,
+  onCloseCb,
 })
 
-export const closeRootModal = {
+export const closeRootModal = () => dispatch => dispatch({
   type: 'CLOSE_ROOT_MODAL',
-};
+});
